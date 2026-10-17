@@ -1,329 +1,582 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المرشد المحلي المستقل | أحمد بدوي يوسف أحمد</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>أحمد بدوي | خدمات تحسين الظهور المحلي وGoogle Business</title>
+    <meta name="description" content="خدمات إعداد وتحسين الملف التجاري على Google، تصوير الأنشطة التجارية، واستشارات الظهور المحلي في مصر. تواصل مباشرة عبر واتساب.">
+    <meta name="theme-color" content="#0B0F17">
+    
+    <!-- Cairo Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            darkBg: '#0B0F17',
+                            cardBg: '#111827',
+                            gold: '#F59E0B',
+                            goldHover: '#D97706'
+                        }
+                    },
+                    boxShadow: {
+                        'glow-amber': '0 0 25px -5px rgba(245, 158, 11, 0.3)',
+                        'glow-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #050505;
-            color: #ffffff;
-            overflow-x: hidden;
+            background-color: #0B0F17;
+            color: #F3F4F6;
         }
-        .gold-gradient {
-            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .glass-card {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .gold-bg {
-            background: linear-gradient(135deg, #BF953F 0%, #AA771C 50%, #6d4b10 100%);
+        .glass-card:hover {
+            border-color: rgba(245, 158, 11, 0.3);
         }
-        .gold-border {
-            border: 2px solid #BF953F;
-            box-shadow: 0 0 15px rgba(191, 149, 63, 0.3);
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        .card-gold {
-            background: linear-gradient(145deg, #111111, #1a1a1a);
-            border: 1px solid rgba(191, 149, 63, 0.4);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        ::-webkit-scrollbar-track {
+            background: #0B0F17;
         }
-        @keyframes pulseGold {
-            0% { box-shadow: 0 0 0 0 rgba(191, 149, 63, 0.4); }
-            70% { box-shadow: 0 0 0 20px rgba(191, 149, 63, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(191, 149, 63, 0); }
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 4px;
         }
-        .pulse-btn {
-            animation: pulseGold 2s infinite;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F59E0B;
         }
     </style>
 </head>
-<body class="bg-[#050505] min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-amber-500 selection:text-black">
 
-    <!-- 1. شاشة الدخول الفخمة (Splash Screen) -->
-    <div id="splash-screen" class="fixed inset-0 z-50 bg-[#050505] flex flex-col items-center justify-center p-6 transition-opacity duration-1000">
-        <div class="relative mb-8">
-            <div class="absolute -inset-4 bg-amber-500/20 rounded-full blur-xl animate-pulse"></div>
-            <div class="w-28 h-28 rounded-full gold-bg flex items-center justify-center relative shadow-2xl pulse-btn">
-                <i class="fa-solid fa-crown text-black text-5xl"></i>
-            </div>
-        </div>
-        <div class="text-center">
-            <h1 class="text-4xl md:text-5xl font-black mb-3 gold-gradient tracking-wide">أحمد بدوي يوسف أحمد</h1>
-            <p class="text-gray-300 text-lg md:text-xl font-semibold mb-8 tracking-wider">مرشد محلي مستقل • المستوى 8</p>
-            <div class="inline-block p-[2px] rounded-full gold-bg">
-                <button onclick="enterWelcome()" class="bg-black hover:bg-neutral-900 text-white px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 flex items-center gap-3 cursor-pointer">
-                    <span>دخول المنصة الفاخرة</span>
-                    <i class="fa-solid fa-arrow-left text-amber-400"></i>
-                </button>
-            </div>
-        </div>
-        <div class="absolute bottom-8 text-xs text-gray-500">
-            أماكنك .. تستحق الظهور
-        </div>
+    <!-- Background Music & Floating Control Widget -->
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="fixed bottom-6 right-6 z-50">
+        <button id="music-toggle-btn" class="bg-amber-500 hover:bg-amber-600 text-gray-950 p-3.5 rounded-full shadow-glow-amber transition-all flex items-center justify-center cursor-pointer transform hover:scale-105" title="تشغيل/إيقاف الموسيقى">
+            <i id="music-icon" class="fa-solid fa-music text-xl"></i>
+        </button>
     </div>
 
-    <!-- 2. الواجهة الترحيبية (Welcome Screen) -->
-    <div id="welcome-screen" class="fixed inset-0 z-40 bg-[#050505] hidden flex-col items-center justify-center p-6 text-center transition-all duration-700 opacity-0">
-        <div class="max-w-xl w-full card-gold p-8 md:p-12 rounded-3xl relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl"></div>
-            <div class="text-amber-400 text-5xl mb-6">
-                <i class="fa-solid fa-map-location-dot"></i>
-            </div>
-            <h2 class="text-2xl md:text-3xl font-bold mb-4 text-white leading-relaxed">
-                أهلاً بك مع المرشد المحلي المستقل <br><span class="gold-gradient text-3xl md:text-4xl block mt-2">أحمد بدوي</span>
-            </h2>
-            <p class="text-gray-400 text-sm md:text-base mb-8 border-y border-neutral-800 py-3">
-                لا أمثل شركة جوجل بشكل رسمي • خبرة وثقة لرفع ظهور نشاطك التجاري لأعلى المستويات.
-            </p>
-            <button onclick="openMainApp()" class="w-full gold-bg text-black font-extrabold py-4 px-8 rounded-xl text-lg shadow-lg hover:opacity-90 transition transform active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
-                <span>تصفح الخدمات والأسعار</span>
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-        </div>
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 left-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-emerald-600 text-white px-5 py-3 rounded-xl shadow-2xl border border-emerald-400/30">
+        <i class="fa-solid fa-circle-check text-xl"></i>
+        <span id="toast-message" class="font-bold text-sm">تم النسخ بنجاح!</span>
     </div>
 
-    <!-- 3. الصفحة الرئيسية الشاملة (Main App Content) -->
-    <div id="main-content" class="flex-1 hidden flex-col justify-between max-w-5xl mx-auto w-full p-4 md:p-8">
-        
-        <!-- الهيدر الشخصي والشارات -->
-        <header class="card-gold rounded-3xl p-6 md:p-8 mb-8 text-center relative overflow-hidden">
-            <div class="absolute -top-10 -left-10 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl"></div>
-            
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
-                <!-- شعار المستوى -->
-                <div class="flex items-center gap-4 bg-black/60 p-4 rounded-2xl gold-border">
-                    <div class="relative">
-                        <div class="w-16 h-16 rounded-full gold-bg flex items-center justify-center font-black text-2xl text-black">
-                            8
-                        </div>
-                        <i class="fa-solid fa-crown text-amber-300 absolute -top-3 right-3 text-xl"></i>
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-brand-darkBg/80 border-b border-gray-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-300 flex items-center justify-center text-gray-900 shadow-glow-amber font-black text-xl">
+                        <i class="fa-solid fa-location-dot"></i>
                     </div>
-                    <div class="text-right">
-                        <span class="text-xs text-gray-400 block">المستوى في خرائط جوجل</span>
-                        <div class="text-amber-400 text-sm font-bold flex gap-1">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <span class="text-xs text-gray-300 mt-1 block">(500 ألف مشاهدة)</span>
+                    <div>
+                        <span class="text-xl font-black tracking-wide block leading-none text-white">مرشد محلي <span class="text-amber-400">المستوى 8</span></span>
+                        <span class="text-xs text-gray-400 font-medium">صانع محتوى وتقييمات خرائط</span>
                     </div>
                 </div>
 
-                <!-- العنوان والاسم -->
-                <div class="text-center md:text-right flex-1">
-                    <div class="inline-block bg-amber-500/10 text-amber-400 px-3 py-1 rounded-full text-xs font-semibold mb-2 border border-amber-500/30">
-                        مرشد محلي مستقل
-                    </div>
-                    <h1 class="text-2xl md:text-4xl font-black gold-gradient">أحمد بدوي يوسف أحمد</h1>
-                    <p class="text-xs md:text-sm text-gray-400 mt-1">لا أمثل شركة جوجل بشكل رسمي</p>
-                </div>
+                <nav class="hidden md:flex items-center gap-5 text-sm font-bold text-gray-300">
+                    <a href="#about" class="hover:text-amber-400 transition-colors">من أنا</a>
+                    <a href="#calculator" class="hover:text-amber-400 transition-colors">خدماتي وأسعاري</a>
+                    <a href="#portfolio" class="hover:text-amber-400 transition-colors">أعمالي وإنجازاتي</a>
+                    <a href="#platforms" class="hover:text-amber-400 transition-colors">منصات التواصل</a>
+                    <a href="#youtube" class="hover:text-amber-400 transition-colors">قنوات يوتيوب</a>
+                    <a href="#contact" class="hover:text-amber-400 transition-colors">تواصل معي</a>
+                </nav>
+
+                <a href="#calculator" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-gray-950 font-extrabold px-5 py-2.5 rounded-xl transition-all shadow-glow-amber transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-calculator"></i>
+                    <span>خدماتي وأسعاري</span>
+                </a>
             </div>
+        </div>
+    </header>
 
-            <!-- التخصصات -->
-            <div class="mt-6 pt-6 border-t border-neutral-800 text-center">
-                <span class="text-xs text-amber-400/80 font-bold block mb-1">تخصصي:</span>
-                <p class="text-sm md:text-base text-gray-200 font-medium">
-                    توثيق الأماكن، تقديم مراجعات دقيقة، وتحسين الظهور الرقمي للأنشطة التجارية
-                </p>
-            </div>
-        </header>
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="relative py-16 lg:py-24 overflow-hidden">
+            <div class="absolute top-1/4 right-1/2 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-10 left-10 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <!-- الخدمات والأسعار -->
-        <section class="mb-8">
-            <h2 class="text-xl font-bold mb-6 text-center gold-gradient flex items-center justify-center gap-2">
-                <i class="fa-solid fa-gem"></i> باقات وخدمات الظهور الرقمي
-            </h2>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                
-                <!-- خدمة 1 -->
-                <div class="card-gold rounded-2xl p-5 flex flex-col justify-between hover:border-amber-400 transition duration-300">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4 text-xl">
-                            <i class="fa-solid fa-shield-check"></i>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 text-center lg:text-right space-y-6">
+                        <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold">
+                            <i class="fa-solid fa-star text-amber-400"></i>
+                            <span>مرشد محلي موثوق على خرائط Google (Level 8)</span>
                         </div>
-                        <h3 class="font-bold text-base text-white mb-2">تحديث وتدقيق البيانات</h3>
-                        <p class="text-xs text-gray-400 mb-4">مراجعة وتحديث دقيق لبيانات نشاطك لضمان ثقة العملاء.</p>
+                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight">
+                            ارتقِ بمشروعك التجاري إلى <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500">قمة نتائج البحث</span>
+                        </h1>
+                        <p class="text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            أساعد الأنشطة التجارية على تحسين حضورها الرقمي عبر إعداد وتحديث ملفات Google Business، وتصوير المكان والمنتجات، وتنظيم بيانات النشاط، وتقديم استشارات لتحسين الظهور المحلي.
+                        </p>
+                        
+                        <!-- عروض الخصومات الترويجية -->
+                        <div class="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 text-amber-300 text-sm flex flex-wrap gap-3 justify-center lg:justify-start items-center font-bold">
+                            <span>🔥 عروض الباقات:</span>
+                            <span class="bg-amber-500/20 px-2.5 py-1 rounded-lg">طلبين (خصم 15%)</span>
+                            <span class="bg-amber-500/20 px-2.5 py-1 rounded-lg">3 طلبات (خصم 25%)</span>
+                            <span class="bg-amber-500/20 px-2.5 py-1 rounded-lg">كل الخدمات (خصم 40%)</span>
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="#calculator" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-gray-950 font-black px-8 py-4 rounded-xl text-base transition-all shadow-glow-amber transform hover:-translate-y-1">
+                                <i class="fa-solid fa-bolt"></i>
+                                <span>اطلب خدمة الآن</span>
+                            </a>
+                            <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gray-800 hover:bg-gray-700 text-white font-bold px-8 py-4 rounded-xl text-base border border-gray-700 transition-all hover:border-gray-600">
+                                <i class="fa-brands fa-whatsapp text-emerald-400 text-xl"></i>
+                                <span>استشارة مباشرة</span>
+                            </a>
+                        </div>
                     </div>
-                    <div class="pt-4 border-t border-neutral-800 text-center">
-                        <span class="text-lg font-black gold-gradient">500 ج.م</span>
+
+                    <div class="lg:col-span-5">
+                        <div class="glass-card p-8 rounded-3xl relative overflow-hidden text-center border border-amber-500/20 shadow-2xl">
+                            <div class="absolute -top-12 -right-12 w-32 h-32 bg-amber-500/20 rounded-full blur-2xl"></div>
+                            
+                            <div class="relative mx-auto w-32 h-32 mb-6">
+                                <div class="w-full h-full rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 p-1 shadow-glow-amber flex items-center justify-center">
+                                    <div class="w-full h-full bg-gray-900 rounded-full flex flex-col items-center justify-center text-amber-400">
+                                        <i class="fa-solid fa-award text-4xl mb-1"></i>
+                                        <span class="text-xs font-black uppercase text-gray-300">Google Guide</span>
+                                    </div>
+                                </div>
+                                <span class="absolute bottom-0 right-0 bg-amber-500 text-gray-950 font-black text-xs px-2.5 py-1 rounded-full border-2 border-gray-900 shadow">
+                                    Level 8
+                                </span>
+                            </div>
+
+                            <h3 class="text-2xl font-bold text-white mb-2">مرشد محلي — المستوى 8</h3>
+                            <p class="text-gray-400 text-sm mb-6">أكثر من 500 ألف مشاهدة وفق إحصاءات الملف الشخصي</p>
+
+                            <div class="grid grid-cols-2 gap-3 pt-4 border-t border-gray-800 text-right">
+                                <div class="bg-gray-900/60 p-3 rounded-xl border border-gray-800">
+                                    <span class="block text-xs text-gray-400">المشاهدات</span>
+                                    <span class="text-lg font-extrabold text-emerald-400">أكثر من 500 ألف</span>
+                                </div>
+                                <div class="bg-gray-900/60 p-3 rounded-xl border border-gray-800">
+                                    <span class="block text-xs text-gray-400">نطاق الخدمة</span>
+                                    <span class="text-lg font-extrabold text-amber-400">حسب الاتفاق</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- خدمة 2 -->
-                <div class="card-gold rounded-2xl p-5 flex flex-col justify-between hover:border-amber-400 transition duration-300">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4 text-xl">
-                            <i class="fa-solid fa-folder-open"></i>
-                        </div>
-                        <h3 class="font-bold text-base text-white mb-2">تجهيز ملف تجاري كامل</h3>
-                        <p class="text-xs text-gray-400 mb-4">إنشاء وضبط ملف متكامل احترافي على خرائط جوجل.</p>
-                    </div>
-                    <div class="pt-4 border-t border-neutral-800 text-center">
-                        <span class="text-lg font-black gold-gradient">1,750 ج.م</span>
-                    </div>
-                </div>
-
-                <!-- خدمة 3 -->
-                <div class="card-gold rounded-2xl p-5 flex flex-col justify-between hover:border-amber-400 transition duration-300">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4 text-xl">
-                            <i class="fa-solid fa-calendar-days"></i>
-                        </div>
-                        <h3 class="font-bold text-base text-white mb-2">إدارة شهرية مستمرة</h3>
-                        <p class="text-xs text-gray-400 mb-4">متابعة، ردود، وتحسين دوري لضمان الصدارة المستمرة.</p>
-                    </div>
-                    <div class="pt-4 border-t border-neutral-800 text-center">
-                        <span class="text-lg font-black gold-gradient">2,500 ج.م</span>
-                    </div>
-                </div>
-
-                <!-- خدمة 4 -->
-                <div class="card-gold rounded-2xl p-5 flex flex-col justify-between hover:border-amber-400 transition duration-300">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4 text-xl">
-                            <i class="fa-solid fa-bullhorn"></i>
-                        </div>
-                        <h3 class="font-bold text-base text-white mb-2">ترويج للملف التجاري</h3>
-                        <p class="text-xs text-gray-400 mb-4">حملات وترويج ذكي لزيادة المشاهدات والعملاء المستهدفين.</p>
-                    </div>
-                    <div class="pt-4 border-t border-neutral-800 text-center">
-                        <span class="text-lg font-black gold-gradient">1,250 ج.م</span>
-                    </div>
-                </div>
-
             </div>
         </section>
 
-        <!-- قسم منصات التواصل الاجتماعي والروابط الشخصية -->
-        <section class="mb-8 card-gold rounded-3xl p-6 md:p-8">
-            <h3 class="text-xl font-bold mb-6 text-center gold-gradient flex items-center justify-center gap-2">
-                <i class="fa-solid fa-share-nodes"></i> منصاتي وحساباتي الرسمية
-            </h3>
-            
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                <a href="https://maps.app.goo.gl/3iWzBuiZ6pJVN8tK9" target="_blank" class="bg-black/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 p-3 rounded-xl text-center transition flex items-center justify-center gap-2 text-xs font-bold text-gray-200">
-                    <i class="fa-solid fa-map-location-dot text-amber-400"></i> خرائط جوجل
-                </a>
-                <a href="https://www.youtube.com/@apobadar8" target="_blank" class="bg-black/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 p-3 rounded-xl text-center transition flex items-center justify-center gap-2 text-xs font-bold text-gray-200">
-                    <i class="fa-brands fa-youtube text-red-500"></i> يوتيوب 1
-                </a>
-                <a href="https://www.youtube.com/@ahmedbadawy8402" target="_blank" class="bg-black/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 p-3 rounded-xl text-center transition flex items-center justify-center gap-2 text-xs font-bold text-gray-200">
-                    <i class="fa-brands fa-youtube text-red-500"></i> يوتيوب 2
-                </a>
-                <a href="https://wa.me/badrthelegend" target="_blank" class="bg-black/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 p-3 rounded-xl text-center transition flex items-center justify-center gap-2 text-xs font-bold text-gray-200">
-                    <i class="fa-brands fa-whatsapp text-emerald-500"></i> واتس الأعمال
-                </a>
-                <a href="https://wa.me/apobadrah6" target="_blank" class="bg-black/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 p-3 rounded-xl text-center transition flex items-center justify-center gap-2 text-xs font-bold text-gray-200">
-                    <i class="fa-brands fa-whatsapp text-emerald-500"></i> واتساب (2)
-                </a>
-                <a href="https://t.me/Apobadr67475" target="_blank" class="bg-black/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 p-3 rounded-xl text-center transition flex items-center justify-center gap-2 text-xs font-bold text-gray-200">
-                    <i class="fa-brands fa-telegram text-sky-400"></i> تليجرام 1
-                </a>
-                <a href="https://t.me/Ah098756" target="_blank" class="bg-black/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 p-3 rounded-xl text-center transition flex items-center justify-center gap-2 text-xs font-bold text-gray-200">
-                    <i class="fa-brands fa-telegram text-sky-400"></i> تليجرام 2
-                </a>
-                <a href="https://instagram.com/apobadrahmed50" target="_blank" class="bg-black/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 p-3 rounded-xl text-center transition flex items-center justify-center gap-2 text-xs font-bold text-gray-200">
-                    <i class="fa-brands fa-instagram text-pink-500"></i> انستجرام
-                </a>
-                <a href="https://www.snapchat.com/add/ahmed_badaw8455?share_id=q3wJG_ldB4M&locale=ar-AE" target="_blank" class="bg-black/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 p-3 rounded-xl text-center transition flex items-center justify-center gap-2 text-xs font-bold text-gray-200">
-                    <i class="fa-brands fa-snapchat text-yellow-400"></i> سناب شات
-                </a>
-                <a href="https://x.com/LeaderAlFetra" target="_blank" class="bg-black/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 p-3 rounded-xl text-center transition flex items-center justify-center gap-2 text-xs font-bold text-gray-200">
-                    <i class="fa-brands fa-x-twitter text-white"></i> إكس (تويتر)
-                </a>
-                <a href="https://tiktok.com/@ahmedapobadr2.5" target="_blank" class="bg-black/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 p-3 rounded-xl text-center transition flex items-center justify-center gap-2 text-xs font-bold text-gray-200">
-                    <i class="fa-brands fa-tiktok text-cyan-400"></i> تيك توك
-                </a>
-                <a href="https://m.me/ahmed.badawy.393953" target="_blank" class="bg-black/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 p-3 rounded-xl text-center transition flex items-center justify-center gap-2 text-xs font-bold text-gray-200">
-                    <i class="fa-brands fa-facebook-messenger text-blue-500"></i> ماسنجر
-                </a>
-                <a href="https://www.facebook.com/share/1DQCg5PvaA/" target="_blank" class="bg-black/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 p-3 rounded-xl text-center transition flex items-center justify-center gap-2 text-xs font-bold text-gray-200 col-span-2 sm:col-span-1">
-                    <i class="fa-brands fa-facebook text-blue-600"></i> فيسبوك
-                </a>
+        <!-- About Section -->
+        <section id="about" class="py-16 border-y border-gray-800/80 bg-gray-900/30">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="glass-card rounded-3xl p-8 sm:p-10 border border-amber-500/20">
+                    <span class="text-amber-400 text-sm font-bold">من أنا</span>
+                    <h2 class="text-3xl font-black text-white mt-2">أحمد بدوي يوسف أحمد</h2>
+                    <p class="text-gray-300 leading-8 mt-4">مرشد محلي مستقل — المستوى 8. أعمل على توثيق الأماكن وتقديم مراجعات دقيقة ومساعدة الأنشطة التجارية في تحسين ظهورها الرقمي وتنظيم بياناتها.</p>
+                    <p class="text-gray-500 text-sm mt-4">تنويه: مرشد محلي مستقل، ولا أمثل شركة Google بشكل رسمي.</p>
+                </div>
             </div>
         </section>
 
-        <!-- قسم التواصل الفاخر وأزرار الاتصال والواتساب للرقمين -->
-        <footer class="card-gold rounded-3xl p-6 md:p-8 text-center">
-            <h3 class="text-lg font-bold text-white mb-2">للتواصل المباشر والاستفسارات</h3>
-            <p class="text-xs text-amber-400 mb-6 font-semibold">لأن كل مكان .. يستحق أن يُرى</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
-                
-                <!-- الرقم الأول -->
-                <div class="bg-black/80 border border-neutral-800 p-4 rounded-2xl flex flex-col items-center gap-3">
-                    <span class="text-sm font-bold text-gray-300 tracking-wider">01102336426</span>
-                    <div class="flex gap-3 w-full">
-                        <a href="tel:01102336426" class="flex-1 bg-emerald-700 hover:bg-emerald-600 text-white py-2.5 px-4 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg">
-                            <i class="fa-solid fa-phone"></i>
-                            <span>اتصال مباشر</span>
-                        </a>
-                        <a href="https://wa.me/201102336426" target="_blank" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 px-4 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg">
-                            <i class="fa-brands fa-whatsapp text-sm"></i>
-                            <span>واتساب</span>
-                        </a>
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-16 bg-gray-900/50 border-y border-gray-800/80 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <h2 class="text-2xl sm:text-3xl font-black text-white mb-3">إنجازاتي الموثقة</h2>
+                    <p class="text-gray-400">الأرقام كما ظهرت في لقطات الشاشة المقدمة، وليست بيانات مباشرة محدثة تلقائيًا.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
+                    <div class="glass-card p-6 rounded-2xl border border-amber-500/20">
+                        <div class="text-3xl font-black text-amber-400">8</div>
+                        <div class="text-sm font-bold text-white mt-2">مستوى المرشد المحلي</div>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl border border-amber-500/20">
+                        <div class="text-3xl font-black text-amber-400">40,344</div>
+                        <div class="text-sm font-bold text-white mt-2">نقطة من 50,000</div>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl border border-amber-500/20">
+                        <div class="text-3xl font-black text-emerald-400">513,008</div>
+                        <div class="text-sm font-bold text-white mt-2">مشاهدة للصور</div>
+                        <p class="text-xs text-gray-400 mt-1">+7.3 ألف مشاهدة جديدة ظاهرة</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl border border-amber-500/20">
+                        <div class="text-3xl font-black text-amber-400">644 ألف</div>
+                        <div class="text-sm font-bold text-white mt-2">مشاهدات الملف/المساهمات</div>
+                        <p class="text-xs text-gray-400 mt-1">مؤشر منفصل في لقطة أخرى</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- الرقم الثاني -->
-                <div class="bg-black/80 border border-neutral-800 p-4 rounded-2xl flex flex-col items-center gap-3">
-                    <span class="text-sm font-bold text-gray-300 tracking-wider">01060493605</span>
-                    <div class="grid grid-cols-2 gap-3 w-full">
-                        <a href="tel:01060493605" class="bg-emerald-700 hover:bg-emerald-600 text-white py-2.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-lg">
-                            <i class="fa-solid fa-phone"></i>
-                            <span>اتصال</span>
-                        </a>
-                        <a href="https://wa.me/201060493605" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-lg">
-                            <i class="fa-brands fa-whatsapp"></i>
-                            <span>واتساب</span>
-                        </a>
-                    </div>
+        <!-- Interactive Service Calculator -->
+        <section id="calculator" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-amber-400 font-bold text-sm tracking-wider uppercase">احسب تكلفة مشروعك بنفسك ومع خصومات الباقات</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mt-2">حاسبة الخدمات التفاعلية مع الخصومات</h2>
+                    <p class="text-gray-400 text-sm sm:text-base mt-2">كلما زادت الخدمات المطلوبة، زادت نسبة الخصم تلقائياً (طلبين 15%، 3 طلبات 25%، الكل 40%)</p>
                 </div>
 
+                <div class="grid lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-7 space-y-4" id="services-container">
+                        <!-- Service 1 -->
+                        <div class="glass-card p-5 rounded-2xl border border-gray-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all" data-name="تحديث وتدقيق البيانات" data-price="500">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl shrink-0 mt-1 sm:mt-0">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base sm:text-lg">تحديث وتدقيق البيانات</h4>
+                                    <p class="text-xs sm:text-sm text-gray-400 mt-1">تدقيق بيانات النشاط التجاري وتحديثها بدقة لضمان ظهورها بشكل رسمي.</p>
+                                    <div class="mt-2 text-amber-400 font-extrabold text-sm">
+                                        500 <span class="text-xs text-gray-400 font-normal">ج.م</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 bg-gray-900/90 border border-gray-700/80 rounded-xl p-1.5 self-end sm:self-center">
+                                <button type="button" class="decrement-btn w-8 h-8 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-bold flex items-center justify-center transition-colors active:scale-95 cursor-pointer">
+                                    <i class="fa-solid fa-minus text-xs"></i>
+                                </button>
+                                <input type="number" min="0" value="0" class="qty-input w-12 text-center bg-transparent text-white font-black text-base outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                                <button type="button" class="increment-btn w-8 h-8 rounded-lg bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold flex items-center justify-center transition-colors active:scale-95 cursor-pointer">
+                                    <i class="fa-solid fa-plus text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Service 2 -->
+                        <div class="glass-card p-5 rounded-2xl border border-gray-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all" data-name="تجهيز ملف تجاري كامل" data-price="1750">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl shrink-0 mt-1 sm:mt-0">
+                                    <i class="fa-solid fa-folder-open"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base sm:text-lg">تجهيز ملف تجاري كامل</h4>
+                                    <p class="text-xs sm:text-sm text-gray-400 mt-1">إنشاء وإعداد ملف تجاري متكامل واحترافي للنشاط التجاري.</p>
+                                    <div class="mt-2 text-amber-400 font-extrabold text-sm">
+                                        1,750 <span class="text-xs text-gray-400 font-normal">ج.م</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 bg-gray-900/90 border border-gray-700/80 rounded-xl p-1.5 self-end sm:self-center">
+                                <button type="button" class="decrement-btn w-8 h-8 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-bold flex items-center justify-center transition-colors active:scale-95 cursor-pointer">
+                                    <i class="fa-solid fa-minus text-xs"></i>
+                                </button>
+                                <input type="number" min="0" value="0" class="qty-input w-12 text-center bg-transparent text-white font-black text-base outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                                <button type="button" class="increment-btn w-8 h-8 rounded-lg bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold flex items-center justify-center transition-colors active:scale-95 cursor-pointer">
+                                    <i class="fa-solid fa-plus text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Service 3 -->
+                        <div class="glass-card p-5 rounded-2xl border border-gray-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all" data-name="إدارة شهرية مستمرة" data-price="2500">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl shrink-0 mt-1 sm:mt-0">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base sm:text-lg">إدارة شهرية مستمرة</h4>
+                                    <p class="text-xs sm:text-sm text-gray-400 mt-1">متابعة وإدارة دورية ومستمرة للملف التجاري لتحسين الظهور.</p>
+                                    <div class="mt-2 text-amber-400 font-extrabold text-sm">
+                                        2,500 <span class="text-xs text-gray-400 font-normal">ج.م / شهرياً</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 bg-gray-900/90 border border-gray-700/80 rounded-xl p-1.5 self-end sm:self-center">
+                                <button type="button" class="decrement-btn w-8 h-8 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-bold flex items-center justify-center transition-colors active:scale-95 cursor-pointer">
+                                    <i class="fa-solid fa-minus text-xs"></i>
+                                </button>
+                                <input type="number" min="0" value="0" class="qty-input w-12 text-center bg-transparent text-white font-black text-base outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                                <button type="button" class="increment-btn w-8 h-8 rounded-lg bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold flex items-center justify-center transition-colors active:scale-95 cursor-pointer">
+                                    <i class="fa-solid fa-plus text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Service 4 -->
+                        <div class="glass-card p-5 rounded-2xl border border-gray-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all" data-name="ترويج للملف التجاري" data-price="1250">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl shrink-0 mt-1 sm:mt-0">
+                                    <i class="fa-solid fa-bullhorn"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base sm:text-lg">ترويج للملف التجاري</h4>
+                                    <p class="text-xs sm:text-sm text-gray-400 mt-1">حملات ترويجية لزيادة التفاعل والوصول للملف التجاري.</p>
+                                    <div class="mt-2 text-amber-400 font-extrabold text-sm">
+                                        1,250 <span class="text-xs text-gray-400 font-normal">ج.م</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 bg-gray-900/90 border border-gray-700/80 rounded-xl p-1.5 self-end sm:self-center">
+                                <button type="button" class="decrement-btn w-8 h-8 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-bold flex items-center justify-center transition-colors active:scale-95 cursor-pointer">
+                                    <i class="fa-solid fa-minus text-xs"></i>
+                                </button>
+                                <input type="number" min="0" value="0" class="qty-input w-12 text-center bg-transparent text-white font-black text-base outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                                <button type="button" class="increment-btn w-8 h-8 rounded-lg bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold flex items-center justify-center transition-colors active:scale-95 cursor-pointer">
+                                    <i class="fa-solid fa-plus text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary & Checkout Box -->
+                    <div class="lg:col-span-5 sticky top-28">
+                        <div class="glass-card p-6 sm:p-8 rounded-3xl border border-amber-500/30 shadow-2xl relative overflow-hidden">
+                            <div class="flex items-center justify-between pb-6 border-b border-gray-800">
+                                <h3 class="text-xl font-black text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-receipt text-amber-400"></i>
+                                    <span>ملخص الطلب والخصومات</span>
+                                </h3>
+                                <span class="bg-gray-800 text-amber-400 text-xs font-bold px-3 py-1 rounded-full border border-gray-700">خصم تلقائي</span>
+                            </div>
+
+                            <div id="selected-summary" class="py-4 my-2 space-y-3 max-h-48 overflow-y-auto pr-1">
+                                <p class="text-gray-500 text-sm text-center py-6">لم يتم اختيار أي خدمة بعد. استخدم الأزرار لإضافة الخدمات.</p>
+                            </div>
+
+                            <!-- تفاصيل الخصم والإجمالي -->
+                            <div class="pt-4 border-t border-gray-800 space-y-3 text-sm">
+                                <div class="flex justify-between items-center text-gray-400">
+                                    <span>المجموع الفرعي:</span>
+                                    <span id="subtotal-amount" class="font-bold text-white">٠ ج.م</span>
+                                </div>
+                                <div class="flex justify-between items-center text-emerald-400 font-bold">
+                                    <span id="discount-label">نسبة الخصم:</span>
+                                    <span id="discount-amount">٠ ج.م</span>
+                                </div>
+                                <div class="flex justify-between items-center text-lg font-black text-white pt-2 border-t border-gray-800/60">
+                                    <span>الإجمالي النهائي:</span>
+                                    <div class="text-right">
+                                        <span id="grand-total" class="text-3xl font-black text-amber-400">٠</span>
+                                        <span class="text-sm text-amber-400 font-bold"> ج.م</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button id="dispatch-order-btn" class="w-full mt-6 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-black py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all shadow-glow-emerald text-base cursor-pointer">
+                                <i class="fa-brands fa-whatsapp text-2xl"></i>
+                                <span>إرسال الطلب مع الخصم للواتساب</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="mt-8 pt-6 border-t border-neutral-800 text-xs text-gray-500">
-                جميع الحقوق محفوظة © للمرشد المحلي المستقل أحمد بدوي
+        <!-- Social Platforms Hub -->
+        <section id="platforms" class="py-20 bg-gray-900/40 border-t border-gray-800 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="text-amber-400 font-bold text-sm tracking-wider uppercase">شبكة التواصل الموحدة</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-white mt-2">منصات التواصل والإعلام الرسمية</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-10">
+                    <a href="https://wa.me/201060493605" target="_blank" rel="noopener noreferrer" class="glass-card p-5 rounded-2xl border flex flex-col items-center justify-center text-center gap-2 bg-emerald-500/10 text-emerald-400 border-emerald-500/20 hover:border-emerald-500">
+                        <i class="fa-brands fa-whatsapp text-3xl mb-1"></i>
+                        <span class="text-sm font-bold text-gray-100">واتساب الأعمال</span>
+                    </a>
+                    <a href="https://maps.app.goo.gl/3iWzBuiZ6pJVN8tK9" target="_blank" rel="noopener noreferrer" class="glass-card p-5 rounded-2xl border flex flex-col items-center justify-center text-center gap-2 bg-red-500/10 text-red-400 border-red-500/20 hover:border-red-500">
+                        <i class="fa-solid fa-map-location-dot text-3xl mb-1"></i>
+                        <span class="text-sm font-bold text-gray-100">خرائط جوجل</span>
+                    </a>
+                </div>
             </div>
-        </footer>
+        </section>
+    </main>
 
-    </div>
+    <!-- Footer -->
+    <footer class="bg-gray-950 border-t border-gray-800/80 py-10 text-center text-gray-400 text-sm">
+        <p>جميع الحقوق محفوظة © <span id="current-year">2026</span> | أحمد بدوي - مرشد محلي المستوى 8</p>
+    </footer>
 
-    <!-- السكريبت للانتقال السلس بين الشاشات -->
+    <!-- JavaScript Logic with Discount System -->
     <script>
-        function enterWelcome() {
-            const splash = document.getElementById('splash-screen');
-            const welcome = document.getElementById('welcome-screen');
-            
-            splash.classList.add('opacity-0');
-            setTimeout(() => {
-                splash.style.display = 'none';
-                welcome.style.display = 'flex';
-                setTimeout(() => {
-                    welcome.classList.remove('opacity-0');
-                }, 50);
-            }, 500);
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearSpan = document.getElementById('current-year');
+            if(yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-        function openMainApp() {
-            const welcome = document.getElementById('welcome-screen');
-            const mainContent = document.getElementById('main-content');
-            
-            welcome.classList.add('opacity-0');
-            setTimeout(() => {
-                welcome.style.display = 'none';
-                mainContent.style.display = 'flex';
-                window.scrollTo(0, 0);
-            }, 500);
-        }
+            // Background Music Control
+            const bgMusic = document.getElementById('bg-music');
+            const musicToggleBtn = document.getElementById('music-toggle-btn');
+            const musicIcon = document.getElementById('music-icon');
+
+            if(bgMusic && musicToggleBtn) {
+                musicToggleBtn.addEventListener('click', () => {
+                    if (bgMusic.paused) {
+                        bgMusic.play().then(() => {
+                            musicIcon.classList.remove('fa-music');
+                            musicIcon.classList.add('fa-volume-high');
+                        }).catch(e => console.log(e));
+                    } else {
+                        bgMusic.pause();
+                        musicIcon.classList.remove('fa-volume-high');
+                        musicIcon.classList.add('fa-music');
+                    }
+                });
+            }
+
+            const servicesContainer = document.getElementById('services-container');
+            const selectedSummary = document.getElementById('selected-summary');
+            const subtotalAmountSpan = document.getElementById('subtotal-amount');
+            const discountLabel = document.getElementById('discount-label');
+            const discountAmountSpan = document.getElementById('discount-amount');
+            const grandTotalSpan = document.getElementById('grand-total');
+            const dispatchOrderBtn = document.getElementById('dispatch-order-btn');
+
+            function updateCalculator() {
+                if (!servicesContainer) return;
+                const items = servicesContainer.querySelectorAll('[data-name]');
+                let subtotal = 0;
+                let summaryHTML = '';
+                let totalQuantity = 0;
+                let activeServicesCount = 0;
+                const totalAvailableServices = items.length;
+
+                items.forEach(item => {
+                    const name = item.getAttribute('data-name');
+                    const price = parseFloat(item.getAttribute('data-price'));
+                    const qty = parseInt(item.querySelector('.qty-input').value) || 0;
+
+                    if (qty > 0) {
+                        activeServicesCount++;
+                        totalQuantity += qty;
+                        const itemTotal = price * qty;
+                        subtotal += itemTotal;
+                        summaryHTML += `
+                            <div class="flex justify-between items-center bg-gray-900/60 p-3 rounded-xl border border-gray-800 text-sm">
+                                <div>
+                                    <span class="font-bold text-white block">${name}</span>
+                                    <span class="text-xs text-gray-400">العدد: ${qty} × ${price.toLocaleString()} ج.م</span>
+                                </div>
+                                <span class="font-black text-amber-400">${itemTotal.toLocaleString()} ج.م</span>
+                            </div>
+                        `;
+                    }
+                });
+
+                // حساب نسبة الخصم بناءً على عدد الخدمات المختارة
+                let discountPercent = 0;
+                if (activeServicesCount >= totalAvailableServices) {
+                    discountPercent = 40; // خصم الكل
+                } else if (activeServicesCount === 3) {
+                    discountPercent = 25; // خصم 3 طلبات
+                } else if (activeServicesCount === 2) {
+                    discountPercent = 15; // خصم طلبين
+                }
+
+                let discountValue = (subtotal * discountPercent) / 100;
+                let finalTotal = subtotal - discountValue;
+
+                if (activeServicesCount === 0) {
+                    selectedSummary.innerHTML = '<p class="text-gray-500 text-sm text-center py-6">لم يتم اختيار أي خدمة بعد. استخدم الأزرار لإضافة الخدمات.</p>';
+                    subtotalAmountSpan.textContent = '٠ ج.م';
+                    discountLabel.textContent = 'نسبة الخصم (0%):';
+                    discountAmountSpan.textContent = '٠ ج.م';
+                    grandTotalSpan.textContent = '٠';
+                } else {
+                    selectedSummary.innerHTML = summaryHTML;
+                    subtotalAmountSpan.textContent = subtotal.toLocaleString() + ' ج.م';
+                    discountLabel.textContent = `نسبة الخصم (${discountPercent}%):`;
+                    discountAmountSpan.textContent = `- ${discountValue.toLocaleString()} ج.م`;
+                    grandTotalSpan.textContent = finalTotal.toLocaleString();
+                }
+            }
+
+            if (servicesContainer) {
+                servicesContainer.addEventListener('click', (e) => {
+                    const target = e.target.closest('button');
+                    if (!target) return;
+                    const card = target.closest('[data-name]');
+                    if (!card) return;
+                    const input = card.querySelector('.qty-input');
+                    let val = parseInt(input.value) || 0;
+
+                    if (target.classList.contains('increment-btn')) {
+                        val++;
+                    } else if (target.classList.contains('decrement-btn')) {
+                        val = Math.max(0, val - 1);
+                    }
+                    input.value = val;
+                    updateCalculator();
+                });
+
+                servicesContainer.querySelectorAll('.qty-input').forEach(input => {
+                    input.addEventListener('input', () => {
+                        if (input.value < 0 || input.value === '') input.value = 0;
+                        updateCalculator();
+                    });
+                });
+            }
+
+            if (dispatchOrderBtn) {
+                dispatchOrderBtn.addEventListener('click', () => {
+                    const items = servicesContainer.querySelectorAll('[data-name]');
+                    let orderText = 'مرحباً أحمد بدوي، أود طلب الخدمات التالية مع الاستفادة من عروض الخصم:\n\n';
+                    let subtotal = 0;
+                    let activeServicesCount = 0;
+                    let hasAny = false;
+                    const totalAvailableServices = items.length;
+
+                    items.forEach(item => {
+                        const name = item.getAttribute('data-name');
+                        const price = parseFloat(item.getAttribute('data-price'));
+                        const qty = parseInt(item.querySelector('.qty-input').value) || 0;
+                        if (qty > 0) {
+                            hasAny = true;
+                            activeServicesCount++;
+                            const itemTotal = price * qty;
+                            subtotal += itemTotal;
+                            orderText += `- ${name} (العدد: ${qty}) - الإجمالي: ${itemTotal.toLocaleString()} ج.م\n`;
+                        }
+                    });
+
+                    if (!hasAny) {
+                        alert('الرجاء اختيار خدمة واحدة على الأقل أولاً.');
+                        return;
+                    }
+
+                    let discountPercent = 0;
+                    if (activeServicesCount >= totalAvailableServices) discountPercent = 40;
+                    else if (activeServicesCount === 3) discountPercent = 25;
+                    else if (activeServicesCount === 2) discountPercent = 15;
+
+                    let discountValue = (subtotal * discountPercent) / 100;
+                    let finalTotal = subtotal - discountValue;
+
+                    orderText += `\n-------------------\n`;
+                    orderText += `💰 المجموع الفرعي: ${subtotal.toLocaleString()} ج.م\n`;
+                    orderText += `🎁 نسبة الخصم المطبقة: ${discountPercent}% (-${discountValue.toLocaleString()} ج.م)\n`;
+                    orderText += `✨ الإجمالي النهائي بعد الخصم: ${finalTotal.toLocaleString()} ج.م`;
+
+                    const encodedMessage = encodeURIComponent(orderText);
+                    window.open(`https://wa.me/201060493605?text=${encodedMessage}`, '_blank');
+                });
+            }
+        });
     </script>
-
 </body>
 </html>
